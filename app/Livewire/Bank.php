@@ -29,7 +29,6 @@ class Bank extends Component
         // Retrieve the order items and shipping address
         $this->orderItems = $this->order->items; // Assuming 'items' is a relationship
         $this->shippingAddress = $this->order->address; // Assuming 'address' is a relationship
-
     }
 
     public function render()

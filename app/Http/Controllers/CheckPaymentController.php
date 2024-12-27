@@ -33,21 +33,36 @@ class CheckPaymentController extends Controller
         $shipping_amount = $order->shipping_amount;
         $grand_total = $order->grand_total;
 
-        // Lấy transaction dựa trên transaction_content chứa orderCode
-        $transaction = Transaction::where('transaction_content', 'like', '%' . $orderCode . '%')
-            ->where('amount_in', '=', ($shipping_amount + $grand_total)) // Kiểm tra amount_in
+        if($order->payment_method == 'cod'){
+            $transaction = Transaction::where('transaction_content', 'like', '%' . $orderCode . '%')
+            ->where('amount_in', '=', ($order->deposit_amount)) // Kiểm tra amount_in
             ->first();
-
-        // Kiểm tra nếu transaction tồn tại và điều kiện thanh toán
-        if ($transaction) {
-            // Cập nhật trạng thái thanh toán của order
-            $order->update(['payment_status' => 'paid']);
-            return response()->json([
-                'invitation_code' => $order->order_code,
-                'customer_id' => $order->user_id,
-                'payment_status' => $order->payment_status
-            ]);
+            if ($transaction) {
+                // Cập nhật trạng thái thanh toán của order
+                $order->update(['deposit_status' => 'paid']);
+                return response()->json([
+                    'invitation_code' => $order->order_code,
+                    'customer_id' => $order->user_id,
+                    'payment_status' => $order->payment_status
+                ]);
+            }
+        }else{
+            // Lấy transaction dựa trên transaction_content chứa orderCode
+            $transaction = Transaction::where('transaction_content', 'like', '%' . $orderCode . '%')
+                ->where('amount_in', '=', ($shipping_amount + $grand_total)) // Kiểm tra amount_in
+            ->first();
+            if ($transaction) {
+                // Cập nhật trạng thái thanh toán của order
+                $order->update(['payment_status' => 'paid']);
+                return response()->json([
+                    'invitation_code' => $order->order_code,
+                    'customer_id' => $order->user_id,
+                    'payment_status' => $order->payment_status
+                ]);
+            }
         }
+        // Kiểm tra nếu transaction tồn tại và điều kiện thanh toán
+
 
         return response()->json([
             'invitation_code' => $order->order_code,
