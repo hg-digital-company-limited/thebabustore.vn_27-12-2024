@@ -315,7 +315,7 @@
                                                                 </label>
                                                             </div>
                                                         </div>
-                                                    
+
                                                         <div class="content-box__row">
                                                             <div class="radio-wrapper">
                                                                 <div class="radio__input">
@@ -330,7 +330,7 @@
                                                                     </span>
                                                                 </label>
                                                             </div>
-                                                    
+
                                                             <div class="content-box__row__desc" id="cod-description" style="display: {{ $paymentMethod == 'cod' ? 'block' : 'none' }};">
                                                                 <p>Bạn chỉ phải thanh toán khi nhận được hàng</p>
                                                                 <p>Vui lòng thanh toán cọc 50000đ sau khi đặt hàng qua mã QR banking, số tiền COD của đơn hàng sẽ được tự động trừ đi.</p>
@@ -339,18 +339,18 @@
                                                                 function toggleDescription() {
                                                                     const codDescription = document.getElementById('cod-description');
                                                                     const isCodSelected = document.getElementById('paymentMethod-514821').checked;
-                                                            
+
                                                                     // Show or hide the description based on the selected payment method
                                                                     codDescription.style.display = isCodSelected ? 'block' : 'none';
                                                                 }
-                                                            
+
                                                                 // Initial toggle to set the correct display state on page load
                                                                 document.addEventListener('DOMContentLoaded', toggleDescription);
                                                             </script>
                                                         </div>
                                                     </div>
-                                                    
-                                              
+
+
 
                                                 </div>
                                             </section>
@@ -565,7 +565,7 @@
                                                             @php
                                                             // Khởi tạo phí vận chuyển mặc định
                                                             $shipping_fee = 0;
-                                                        
+
                                                             // Kiểm tra phương thức thanh toán
                                                             if ($paymentMethod === 'cod') {
                                                                 $shipping_fee = 30000; // Miễn phí ship khi thanh toán COD
@@ -574,16 +574,16 @@
                                                             }
                                                             if ($shipping_method === 'in_store_pickup') {
                                                                 $shipping_fee = 0; // Miễn phí ship khi thanh toán COD
-                                                            }  
+                                                            }
                                                         @endphp
-                                                            
+
                                                             {{ $shipping_fee > 0 ? number_format($shipping_fee, 0, ',', '.') . '₫' : 'Miễn phí' }}
                                                         </td>
                                                     </tr>
                                                     @if ($paymentMethod === 'cod')
                                                     <tr class="total-line total-line--cod-discount">
                                                         <th class="total-line__name">
-                                                            Đã thanh toán
+                                                            Tiền cọc
                                                         </th>
                                                         <td class="total-line__price">
                                                             -50.000₫
@@ -594,8 +594,8 @@
                                                 <tfoot class="total-line-table__footer">
                                                     @php
                                                     // Determine shipping fee based on method
-                                               
-                                                
+
+
                                                     // Calculate the final total based on the payment method
                                                     if ($paymentMethod === 'cod') {
                                                         $final_total = $total + $shipping_fee - 50000;
@@ -615,7 +615,7 @@
                                                         </span>
                                                     </td>
                                                 </tr>
-                                                
+
                                                 </tfoot>
                                             </table>
                                         </div>

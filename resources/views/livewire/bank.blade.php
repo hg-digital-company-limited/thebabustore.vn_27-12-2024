@@ -103,9 +103,15 @@
                                 <p><i class="fa fa-money" aria-hidden="true"></i>
                                     <span style="padding-left: 5px;">Số tiền cần thanh toán</span>
                                     <br />
+                                    @if($order->payment_method == 'bank')
                                     <b style="padding-left: 25px;color:aqua;"> {{
                                         number_format($order->grand_total + $order->shipping_amount, 0, ',', '.')
                                         }}đ</b>
+                                    @else
+                                    <b style="padding-left: 25px;color:aqua;"> {{
+                                        number_format($order->deposit_amount, 0, ',', '.')
+                                        }}đ</b>
+                                    @endif
                                 </p>
                             </div>
                             <div class="entry">
@@ -118,6 +124,31 @@
                                         class="fas fa-copy copy"></i>
                                 </p>
                             </div>
+                            @if ($order->payment_method == 'cod')
+                            <div class="entry">
+                                <p>
+                                    <i class="fa fa-barcode" aria-hidden="true"></i>
+                                    <span style="padding-left: 5px;">Trạng thái</span>
+                                    <br />
+                                    @if($order->deposit_status === 'pending')
+                                    <i class="fa fa-spinner fa-spin"></i>
+                                    <span id="status_payment" style="padding-left: 25px; word-break: break-all;">Đang
+                                        chờ thanh toán...</span>
+                                    @elseif($order->deposit_status === 'paid')
+                                    <i class="fa fa-check-circle" style="color: green;"></i>
+                                    <span id="status_payment" style="padding-left: 25px; word-break: break-all;">Đã
+                                        thanh toán</span>
+                                    @elseif($order->deposit_status === 'failed')
+                                    <i class="fa fa-times-circle" style="color: red;"></i>
+                                    <span id="status_payment" style="padding-left: 25px; word-break: break-all;">Thanh
+                                        toán thất bại</span>
+                                    @else
+                                    <span id="status_payment" style="padding-left: 25px; word-break: break-all;">Trạng
+                                        thái không xác định</span>
+                                    @endif
+                                </p>
+                            </div>
+                            @else
                             <div class="entry">
                                 <p>
                                     <i class="fa fa-barcode" aria-hidden="true"></i>
@@ -141,6 +172,7 @@
                                     @endif
                                 </p>
                             </div>
+                            @endif
                         </div>
                     </div>
                     <div class="col-xs-12 col-sm-12 col-md-8 right">
@@ -160,8 +192,13 @@
                                                         <a>Sử dụng <b> App Internet Banking </b> hoặc ứng dụng camera hỗ
                                                             trợ QR code để quét mã</a>
                                                     </div>
+                                                    @if($order->payment_method == 'bank')
                                                     <img src="https://api.vietqr.io/MB/0355198659/{{number_format($order->grand_total + $order->shipping_amount, 0, ',', '')}}/{{ $order->order_code }}/vietqr_net_2.jpg?accountName=BUI QUANG HUY"
                                                         width="100%" />
+                                                    @else
+                                                    <img src="https://api.vietqr.io/MB/0355198659/{{number_format($order->deposit_amount, 0, ',', '')}}/{{ $order->order_code }}/vietqr_net_2.jpg?accountName=BUI QUANG HUY"
+                                                        width="100%" />
+                                                    @endif
 
                                                 </div>
                                             </div>
@@ -249,9 +286,9 @@
                 }
             });
         }else{
-            fetchCronData(); 
+            fetchCronData();
         }
-     
+
     })
     .catch(error => {
         console.error('Error fetching data:', error);
@@ -274,8 +311,8 @@ function fetchCronTransactions() {
     })
     .then(response => response.json()) // Assuming the response is JSON
     .then(data => {
-        fetchCronTransactions(); 
-     
+        fetchCronTransactions();
+
     })
     .catch(error => {
         fetchCronTransactions();

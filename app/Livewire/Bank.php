@@ -19,19 +19,17 @@ class Bank extends Component
         $this->orderCode = $orderCode; // Store the order code
         // Retrieve the order from the database
         $this->order = Order::where('order_code', $orderCode)
-        ->where('payment_method', 'bank') // Điều kiện phương thức thanh toán là bank
-        ->where('payment_status', 'pending') // Điều kiện trạng thái thanh toán là pending
         ->first();
-
-        // Check if the order exists
-        if (!$this->order) {
-            return redirect()->to('/thanks/'.$this->orderCode);  // Redirect to the desired page if order doesn't exist
+        if ($this->order->payment_method == 'cod' && $this->order->deposit_status == 'paid') {
+            return redirect()->to('/thanks/' . $this->orderCode);  // Redirect if payment is COD and deposit is paid
         }
-
+        if ($this->order->payment_method == 'bank' && $this->order->payment_status == 'paid') {
+            return redirect()->to('/thanks/' . $this->orderCode);  // Redirect if payment is COD and deposit is paid
+        }
         // Retrieve the order items and shipping address
         $this->orderItems = $this->order->items; // Assuming 'items' is a relationship
         $this->shippingAddress = $this->order->address; // Assuming 'address' is a relationship
-  
+
     }
 
     public function render()

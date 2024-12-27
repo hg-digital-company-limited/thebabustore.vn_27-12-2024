@@ -94,13 +94,29 @@ class OrderResource extends Resource
                                 ->numeric() // Chuyển thành input dạng số
                                 ->required()
                                 ->default(0),
-                                
+
                             TextInput::make('grand_total')
                                 ->label('Tổng Cộng') // Đổi nhãn sang tiếng Việt
                                 ->numeric() // Chuyển thành input dạng số
                                 ->required()
                                 ->default(0),
-                                
+
+                            TextInput::make('deposit_amount')
+                                ->label('Tiền Cọc') // Đổi nhãn sang tiếng Việt
+                                ->numeric() // Chuyển thành input dạng số
+                                ->required()
+                                ->default(0),
+
+                            ToggleButtons::make('deposit_status')
+                                ->inline()
+                                ->default('pending')
+                                ->required()
+                                ->label('Trạng Thái Tiền Cọc') // Đổi nhãn sang tiếng Việt
+                                ->options([
+                                    'pending' => 'Đang Chờ',
+                                    'paid'    => 'Đã Thanh Toán',
+                                    'failed'  => 'Thất Bại'
+                                ]),
 
                             ToggleButtons::make('status')
                                 ->inline()
@@ -215,7 +231,7 @@ class OrderResource extends Resource
                     TextColumn::make('address.phone')
                     ->label('Số Điện Thoại')
                     ->searchable(),
-                
+
                 TextColumn::make('user.name')
                     ->label('Khách Hàng') // Đổi nhãn sang tiếng Việt
                     ->sortable()
@@ -244,7 +260,7 @@ class OrderResource extends Resource
                     ->formatStateUsing(fn($state) => match ($state) {
                         'cod' => 'Giao hàng và thu tiền tại nhà (COD)',
                         'bank' => 'Ngân hàng',
-                  
+
                         default => 'Chưa xác định', // Xử lý trường hợp không hợp lệ
                     }),
 

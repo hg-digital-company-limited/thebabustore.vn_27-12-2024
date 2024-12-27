@@ -35,7 +35,7 @@ class Checkout extends Component
 
     public function mount()
     {
-      
+
         $this->cartItems = CartManagement::getCartItemsFromCookie(); // Retrieve cart items from cookie
         if (empty($this->cartItems)) {
             // Chuyển trang đến trang sản phẩm hoặc trang giỏ hàng
@@ -96,12 +96,12 @@ class Checkout extends Component
         // Thực hiện giao dịch cơ sở dữ liệu để đảm bảo tính nhất quán
         DB::transaction(function () {
             $order_code = $this->generateUniqueOrderCode();
-           
+
             // Tạo đơn hàng
             if ($this->total > 800000) {
                 $this->shipping_amount = 0;
             }
-            
+
             // Create the order
             $order = Order::create([
                 'user_id' => auth()->id() ?? 1,
@@ -114,8 +114,10 @@ class Checkout extends Component
                 'notes' => $this->note,
                 'profit_loss' => $this->profit_loss,
                 'shipping_amount' => $this->shipping_method === 'in_store_pickup' ? 0 : $this->shipping_amount,
+                'deposit_amount' => $this->paymentMethod == 'cod' ? 50000 : 0,
+                'deposit_status' => $this->paymentMethod == 'cod' ? 'pending' : 'paid',
             ]);
-            
+
             // Tạo địa chỉ giao hàng
             Address::create([
                 'order_id' => $order->id,
@@ -151,11 +153,12 @@ class Checkout extends Component
                 ]);
             }
             CartManagement::clearCartItems();
-            if($this->paymentMethod == 'bank'){
-                return redirect()->route('bank', ['orderCode' => $order->order_code]);
-            }else{
-                return redirect()->route('thanks', ['orderCode' => $order->order_code]);
-            }
+            return redirect()->route('bank', ['orderCode' => $order->order_code]);
+            // if($this->paymentMethod == 'bank'){
+            //     return redirect()->route('bank', ['orderCode' => $order->order_code]);
+            // }else{
+            //     return redirect()->route('thanks', ['orderCode' => $order->order_code]);
+            // }
 
 
         });

@@ -1,4 +1,4 @@
-cd /var/www/thebabustore.vn                                                                          rzcareer.site.sh
+cd /var/www/thebabustore.vn
 sudo rm -rf ./*
 sudo rm -rf .[^.]*  # Xóa các tệp ẩn
 sudo git clone  https://github.com/hg-digital-company-limited/thebabustore.vn_27-12-2024.git ./ && \
