@@ -152,7 +152,7 @@
                                                                     @endif
                                                                 </td>
                                                             </tr>
-                                                            
+
 
                                                             <!-- Phí vận chuyển -->
                                                             <tr class="total-line total-line--shipping-fee"
@@ -165,6 +165,17 @@
                                                                     '₫' : 'Miễn phí' }}
                                                                 </td>
                                                             </tr>
+                                                            @if($order->payment_method == 'cod')
+                                                            <tr class="total-line total-line--shipping-fee"
+                                                           >
+                                                                <th class="total-line__name">Tiền cọc</th>
+                                                                <td class="total-line__price">
+                                                                    -{{ $order->deposit_amount > 0 ?
+                                                                    number_format($order->deposit_amount, 0, ',', '.') .
+                                                                    '₫' : 'Miễn phí' }}
+                                                                </td>
+                                                            </tr>
+                                                            @endif
                                                         </tbody>
                                                     </table>
                                                 </div>
@@ -178,7 +189,7 @@
                                                                 </th>
                                                                 <td class="total-line__price">
                                                                     <span class="payment-due__price">{{
-                                                                        number_format($order->grand_total + $order->shipping_amount, 0, ',', '.')
+                                                                        number_format($order->grand_total + $order->shipping_amount - ($order->payment_method == 'cod' ? $order->deposit_amount : 0), 0, ',', '.')
                                                                         }}₫</span>
                                                                 </td>
                                                             </tr>
@@ -224,7 +235,7 @@
                                                             @endif
                                                         </p>
                                                     </div>
-                                                  
+
                                                     <div class="col col--md-two">
                                                         @if ($order->payment_method !== 'cod')
                                                         <!-- Kiểm tra nếu không phải COD -->
@@ -241,7 +252,7 @@
                                                             <!-- Fallback for other statuses -->
                                                             @endif
                                                         </p>
-                                                        
+
                                                         @else
                                                         @endif
                                                     </div>

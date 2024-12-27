@@ -43,7 +43,7 @@ class CheckPaymentController extends Controller
                 return response()->json([
                     'invitation_code' => $order->order_code,
                     'customer_id' => $order->user_id,
-                    'payment_status' => $order->payment_status
+                    'payment_status' => $order->deposit_status
                 ]);
             }
         }else{
