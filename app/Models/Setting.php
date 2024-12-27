@@ -30,6 +30,7 @@ class Setting extends Model
         'so_tai_khoan',
         'ngan_hang',
         'facebook',
+        'messenger',
         'youtube',
         'shopee',
         'zalo',

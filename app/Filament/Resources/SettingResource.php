@@ -102,6 +102,10 @@ class SettingResource extends Resource
                     ->label('Facebook')
                     ->placeholder('Nhập link Facebook'),
 
+                Forms\Components\TextInput::make('messenger')
+                    ->label('Messenger')
+                    ->placeholder('Nhập link Messenger'),
+
                 Forms\Components\TextInput::make('youtube')
                     ->label('YouTube')
                     ->placeholder('Nhập link YouTube'),
@@ -193,10 +197,10 @@ class SettingResource extends Resource
                                     ->columnSpanFull()
                                     ->label('Giới thiệu'),
 
-                     
+
                             ]),
 
-                      
+
                     ])
                     ->columnSpanFull()
             ]);

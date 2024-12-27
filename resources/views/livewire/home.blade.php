@@ -47,7 +47,7 @@
 	if(!Bizweb.fbEventId)  Bizweb.fbEventId = 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function (c) {
 	var r = Math.random() * 16 | 0, v = c == 'x' ? r : (r & 0x3 | 0x8);
 				return v.toString(16);
-			});		
+			});
             </script>
 
 
@@ -59,8 +59,8 @@
 	window.BizwebAnalytics.tracking_url = '/s';
 
 	var meta = {};
-	
-	
+
+
 	for (var attr in meta) {
 	window.BizwebAnalytics.meta[attr] = meta[attr];
 	}
@@ -101,7 +101,7 @@
 	document,'script','https://connect.facebook.net/en_US/fbevents.js');
 	fbq('init', '148789000604214', {} , {'agent': 'plsapo'}); // Insert your pixel ID here.
 	fbq('track', 'PageView',{},{ eventID: Bizweb.fbEventId });
-	
+
             </script>
             <noscript>
                 <img height='1' width='1' style='display:none'
@@ -115,9 +115,9 @@
             <script>
                 var eventsListenerScript = document.createElement('script');
 	eventsListenerScript.async = true;
-	
+
 	eventsListenerScript.src = "/dist/js/store_events_listener.min.js?v=8ee4227";
-	
+
 	document.getElementsByTagName('head')[0].appendChild(eventsListenerScript);
             </script>
 
@@ -171,14 +171,14 @@ this.activeTarget=b,this.clear();var c=this.selector+'[data-target="'+b+'"],'+th
             <script type="application/ld+json">
                 {
   "@context" : "http://schema.org",
-  "@type" : "WebSite", 
+  "@type" : "WebSite",
   "name" : "Kicap",
   "url" : "https://kicap.vn",
   "potentialAction":{
     	"@type" : "SearchAction",
     	"target" : "https://kicap.vn/search?query={search_term}",
     	"query-input" : "required name=search_term"
-  	}                     
+  	}
 }
             </script>
             <link href="/bizweb.dktcdn.net/100/436/596/themes/834446/assets/iwish.css?1721662888170" rel="stylesheet"
@@ -269,31 +269,31 @@ this.activeTarget=b,this.clear();var c=this.selector+'[data-target="'+b+'"],'+th
                                                             class="product-card-image-front img-responsive center-block"
                                                             alt="{{ $product->name }}" />
                                                     </picture>
-                                                    @if(isset($product->images[1]))
+                                                    @if(isset($product->images[0]))
                                                     <picture>
                                                         <source media="(min-width: 1200px)"
-                                                            srcset="{{ Storage::url($product->images[1]) }}">
+                                                            srcset="{{ Storage::url($product->images[0]) }}">
                                                         <source media="(min-width: 992px)"
-                                                            srcset="{{ Storage::url($product->images[1]) }}">
+                                                            srcset="{{ Storage::url($product->images[0]) }}">
                                                         <source media="(min-width: 569px)"
-                                                            srcset="{{ Storage::url($product->images[1]) }}">
+                                                            srcset="{{ Storage::url($product->images[0]) }}">
                                                         <source media="(min-width: 480px)"
-                                                            srcset="{{ Storage::url($product->images[1]) }}">
-                                                        <img src="{{ Storage::url($product->images[1]) }}"
-                                                            data-lazyload="{{ Storage::url($product->images[1]) }}"
+                                                            srcset="{{ Storage::url($product->images[0]) }}">
+                                                        <img src="{{ Storage::url($product->images[0]) }}"
+                                                            data-lazyload="{{ Storage::url($product->images[0]) }}"
                                                             class="product-card-image-back img-responsive center-block"
                                                             alt="{{ $product->name }}" />
                                                     </picture>
                                                     @endif
                                                 </div>
-                                                <h4 class="product-single__series">{{ $product->category->name ?? '' }}
+                                                {{-- <h4 class="product-single__series">{{ $product->category->name ?? '' }} --}}
                                                 </h4>
 
-                                                <h3 class="product-card__title"><span style="color: red">{{ $product->isOutOfStock() ? '[Hết hàng]' : '' }}</span> {{ $product->name }}</h3>
+                                                <h3 class="product-card__title" style="text-transform : initial ;color: orange""><span style="color: red">{{ $product->isOutOfStock() ? '[Hết hàng]' : '' }}</span> {{ $product->name }}</h3>
                                                 <div class="product-price">
-                                                    <strong>{{ number_format($product->price, 0, ',', '.') }}₫</strong>
+                                                    <strong style="color: red ;font-size: 15px">{{ number_format($product->price, 0, ',', '.') }}₫</strong>
                                                     @if ($product->discount_price > 0)
-                                                    <span>{{ number_format($product->discount_price, 0, ',', '.')
+                                                    <span style="color: orange">{{ number_format($product->discount_price, 0, ',', '.')
                                                         }}₫</span>
                                                     @endif
                                                 </div>
@@ -365,28 +365,28 @@ this.activeTarget=b,this.clear();var c=this.selector+'[data-target="'+b+'"],'+th
                                                             class="product-card-image-front img-responsive center-block"
                                                             alt="{{ $product->name }}" />
                                                     </picture>
-                                                    @if(isset($product->images[1]))
+                                                    @if(isset($product->images[0]))
                                                     <picture>
                                                         <source media="(min-width: 1200px)"
-                                                            srcset="{{ Storage::url($product->images[1]) }}">
+                                                            srcset="{{ Storage::url($product->images[0]) }}">
                                                         <source media="(min-width: 992px)"
-                                                            srcset="{{ Storage::url($product->images[1]) }}">
+                                                            srcset="{{ Storage::url($product->images[0]) }}">
                                                         <source media="(min-width: 569px)"
-                                                            srcset="{{ Storage::url($product->images[1]) }}">
+                                                            srcset="{{ Storage::url($product->images[0]) }}">
                                                         <source media="(min-width: 480px)"
-                                                            srcset="{{ Storage::url($product->images[1]) }}">
-                                                        <img src="{{ Storage::url($product->images[1]) }}"
-                                                            data-lazyload="{{ Storage::url($product->images[1]) }}"
+                                                            srcset="{{ Storage::url($product->images[0]) }}">
+                                                        <img src="{{ Storage::url($product->images[0]) }}"
+                                                            data-lazyload="{{ Storage::url($product->images[0]) }}"
                                                             class="product-card-image-back img-responsive center-block"
                                                             alt="{{ $product->name }}" />
                                                     </picture>
                                                     @endif
                                                 </div>
-                                                <h4 class="product-single__series">{{ $product->category->name ?? '' }}
+                                                {{-- <h4 class="product-single__series">{{ $product->category->name ?? '' }} --}}
                                                 </h4>
-                                                <h3 class="product-card__title"><span style="color: red">{{ $product->isOutOfStock() ? '[Hết hàng]' : '' }}</span> {{ $product->name }}</h3>
+                                                <h3 class="product-card__title" style="text-transform : initial ;color: orange"><span style="color: red">{{ $product->isOutOfStock() ? '[Hết hàng]' : '' }}</span> {{ $product->name }}</h3>
                                                 <div class="product-price">
-                                                    <strong>{{ number_format($product->price, 0, ',', '.') }}₫</strong>
+                                                    <strong style="color: red ;font-size: 15px">{{ number_format($product->price, 0, ',', '.') }}₫</strong>
                                                     @if ($product->discount_price > 0)
                                                     <span>{{ number_format($product->discount_price, 0, ',', '.')
                                                         }}₫</span>
@@ -426,9 +426,9 @@ this.activeTarget=b,this.clear();var c=this.selector+'[data-target="'+b+'"],'+th
                 <div class="container section_blogs">
                     <div class="row">
                         <div class="col-md-12 col-sm-12 col-xs-12">
-                            <h2 class="text-center"><a style="color: #000" href="/blogs" title="Bài viết KICAP">Bài viết
-                                    <strong>KICAP</strong></a></h2>
-                               
+                            <h2 class="text-center"><a style="color: #000" href="/blogs" title="Hướng Dẫn Sử Dụng">
+                                    <strong>Hướng Dẫn Sử Dụng</strong></a></h2>
+
                             <div class="clearfix row">
                                 @foreach($latestPosts as $post)
                                 <div class="col-md-3 col-sm-6 col-xs-12 news-items">
@@ -649,7 +649,7 @@ this.activeTarget=b,this.clear();var c=this.selector+'[data-target="'+b+'"],'+th
     <style>
         .product-card {
             border: 1px solid gray .5;
-            padding: 0 10px;
+            padding: 0 2px;
             border-radius: 5px;
             box-shadow: 0 0 3px rgba(0, 0, 0, 0.08);
         }

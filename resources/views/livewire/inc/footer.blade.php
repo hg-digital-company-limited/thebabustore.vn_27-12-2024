@@ -350,19 +350,19 @@
         $('.addThis_iconContact .item-contact,.addThis_listSharing .addThis_close').on('click', function(e){
             if($('.addThis_listSharing').hasClass('active')){
                 $('.addThis_listSharing').removeClass('active');
-                $('.addThis_listSharing').fadeOut(150);				
+                $('.addThis_listSharing').fadeOut(150);
             }
-            else{		
+            else{
                 $('.addThis_listSharing').fadeIn(100);
                 $('.addThis_listSharing').addClass('active');
             }
         });
         $('.listSharing_overlay').on('click', function(e){
             $('.addThis_listSharing').removeClass('active');
-            $('.addThis_listSharing').fadeOut(150);				
+            $('.addThis_listSharing').fadeOut(150);
         })
     </script>
-    <a target="_blank" class="livechat-mes" href="{{$settings->facebook}}">
+    <a target="_blank" class="livechat-mes" href="{{$settings->messenger}}">
         <img src="https://bizweb.dktcdn.net/100/485/241/themes/911577/assets/messenger.svg?1705567372895"
             alt="Messenger">
     </a>

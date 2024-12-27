@@ -22,6 +22,7 @@ class Header extends Component
         $this->calculateTotalQuantity(); // Tính tổng số lượng sản phẩm
         $this->categories = Category::with('subcategories')
         ->where('show_in_header', true) // Chỉ lấy các danh mục có show_in_header = 1
+        ->orderBy('ordinal_number', 'asc') // Đặt thứ tự trước khi lấy
         ->get();
         ActivityHistory::create([
             'time' => now(), // Thời gian hiện tại

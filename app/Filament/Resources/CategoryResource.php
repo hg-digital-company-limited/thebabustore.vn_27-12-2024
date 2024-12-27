@@ -79,6 +79,10 @@ class CategoryResource extends Resource
                             ->required()
                             ->default(true)
                             ->helperText('Chọn để hiển thị danh mục này trên header của trang.'),
+                            TextInput::make('ordinal_number')
+                            ->label('Số Thứ Tự') // Đổi nhãn sang tiếng Việt
+                            ->default(0)
+                            ->helperText('Số thứ tự hiển thị danh mục trên header.'),
                     ])
             ]);
     }
@@ -101,7 +105,7 @@ class CategoryResource extends Resource
                 TextColumn::make('slug')
                     ->label('Slug') // Đổi nhãn sang tiếng Việt
                     ->searchable(),
-           
+
                 IconColumn::make('show_in_header')
                     ->label('Hiển Thị Trên Header') // Đổi nhãn sang tiếng Việt
                     ->boolean(),
@@ -111,6 +115,9 @@ class CategoryResource extends Resource
                     ->getStateUsing(function (Category $record) {
                         return $record->product_cat()->count();
                     })
+                    ->sortable(),
+                    TextColumn::make('ordinal_number')
+                    ->label('Số Thứ Tự') // Đổi nhãn sang tiếng Việt
                     ->sortable(),
                     TextColumn::make('description')
                     ->label('Mô tả') // Đổi nhãn sang tiếng Việt
