@@ -19,7 +19,7 @@ class Shop extends Component
     public $categories = [];
     public $brands = []; // Thêm thuộc tính để lưu trữ danh sách thương hiệu
     public $categories_all = [];
-    public $categoryInfo;
+    public $categoryInfo ;
     public $search = '';
     public $sortField = 'name';
     public $sortDirection = 'asc';

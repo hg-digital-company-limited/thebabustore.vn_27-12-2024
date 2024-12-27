@@ -152,19 +152,19 @@
                                                         class="product-card-image-front img-responsive center-block"
                                                         alt="{{ $product->name }}" />
                                                 </picture>
-                                                @if(isset($product->images[1]))
+                                                @if(isset($product->images[0]))
 
                                                 <picture>
                                                     <source media="(min-width: 1200px)"
-                                                        srcset="{{ Storage::url($product->images[1]) }}">
+                                                        srcset="{{ Storage::url($product->images[0]) }}">
                                                     <source media="(min-width: 992px)"
-                                                        srcset="{{ Storage::url($product->images[1]) }}">
+                                                        srcset="{{ Storage::url($product->images[0]) }}">
                                                     <source media="(min-width: 569px)"
-                                                        srcset="{{ Storage::url($product->images[1]) }}">
+                                                        srcset="{{ Storage::url($product->images[0]) }}">
                                                     <source media="(min-width: 480px)"
-                                                        srcset="{{ Storage::url($product->images[1]) }}">
-                                                    <img src="{{ Storage::url($product->images[1]) }}"
-                                                        data-lazyload="{{ Storage::url($product->images[1]) }}"
+                                                        srcset="{{ Storage::url($product->images[0]) }}">
+                                                    <img src="{{ Storage::url($product->images[0]) }}"
+                                                        data-lazyload="{{ Storage::url($product->images[0]) }}"
                                                         class="product-card-image-back img-responsive center-block"
                                                         alt="{{ $product->name }}" />
                                                 </picture>
@@ -274,7 +274,7 @@
 
 
                                     <li class="nav-item ">
-                                        <a class="nav-link" href="/" title="Trang chủ">Trang chủ</a>
+                                        <a class="nav-link" href="/" title="Trang chủ"  style="font-weight: bold  ;text-transform: uppercase  ">Trang chủ</a>
                                     </li>
 
 
@@ -283,7 +283,7 @@
                                     <!-- Kiểm tra điều kiện hiển thị -->
                                     @if ($category->subcategories->isNotEmpty())
                                     <li class="nav-item active">
-                                        <a href="/shop?category={{ $category->slug }}" class="nav-link"
+                                        <a href="/shop?category={{ $category->slug }}" class="nav-link" style="font-weight: bold  ;text-transform: uppercase  "
                                             title="{{ $category->name }}">
                                             {{ strtoupper($category->name) }}
                                         </a>
@@ -301,7 +301,7 @@
                                     </li>
                                     @else
                                     <li class="nav-item">
-                                        <a class="nav-link" href="/shop?category={{ $category->slug }}"
+                                        <a class="nav-link" href="/shop?category={{ $category->slug }}" style="font-weight: bold  ;text-transform: uppercase  "
                                             title="{{ $category->name }}">
                                             {{ strtoupper($category->name) }}
                                         </a>
@@ -312,7 +312,7 @@
 
 
 
-                                    <li class="nav-item">
+                                    {{-- <li class="nav-item">
                                         <a href="/shop" class="nav-link" title="Sản phẩm">Sản phẩm</a>
                                         <span class="Collapsible__Plus"></span>
                                         <ul class="dropdown-menu">
@@ -320,7 +320,7 @@
                                             @if($category->show_in_header)
                                             <!-- Kiểm tra điều kiện hiển thị -->
                                             <li class="dropdown-submenu nav-item">
-                                                <a class="nav-link" href="/shop?category={{ $category->slug }}"
+                                                <a class="nav-link" href="/shop?category={{ $category->slug }}" style="font-weight: bold    "
                                                     title="{{ $category->name }}">
                                                     {{ $category->name }}
                                                 </a>
@@ -344,18 +344,18 @@
                                             @endif
                                             @endforeach
                                         </ul>
+                                    </li> --}}
+
+
+
+                                    <li class="nav-item ">
+                                        <a class="nav-link" href="/blogs" title="Bài viết" style="font-weight: bold  ;text-transform: uppercase  ">Bài viết</a>
                                     </li>
 
 
 
                                     <li class="nav-item ">
-                                        <a class="nav-link" href="/blogs" title="Bài viết">Bài viết</a>
-                                    </li>
-
-
-
-                                    <li class="nav-item ">
-                                        <a href="/about" class="nav-link" title="Về Chúng Tôi">Về Chúng Tôi</a>
+                                        <a href="/about" class="nav-link" title="Về Chúng Tôi" style="font-weight: bold  ;text-transform: uppercase  ">Về Chúng Tôi</a>
                                         <span class="Collapsible__Plus"></span>
                                         <ul class="dropdown-menu">
 
@@ -560,10 +560,10 @@
                                             </ul>
                                         </div>
                                     </aside>
-                                     
+
 
                                     <aside class="aside-item filter-vendor">
-                                        <div class="aside-title">Thương hiệu</div>
+                                        <div class="aside-title " style="font-weight: bold  ;text-transform: uppercase  ">Thương hiệu</div>
                                         <div class="aside-content filter-group">
                                             <ul class="filter-vendor">
                                                 @foreach($brands as $brand)
@@ -582,7 +582,7 @@
                                     </aside>
 
                                     <aside class="aside-item filter-price">
-                                        <div class="aside-title">Giá sản phẩm</div>
+                                        <div class="aside-title " style="font-weight: bold  ;text-transform: uppercase  ">Giá sản phẩm</div>
                                         <div class="aside-content filter-group">
                                             <ul>
                                                 <li class="filter-item filter-item--check-box filter-item--green">
@@ -848,19 +848,19 @@
 
             <script>
                 var filter = new Bizweb.SearchFilter()
-                    
+
                     filter.addValue("collection", "collections", "2683504", "AND");
-                                    
+
                                     function clearAllFiltered() {
                         filter = new Bizweb.SearchFilter();
-                        
+
                         filter.addValue("collection", "collections", "2683504", "AND");
-                                        
-        
+
+
                                         $(".filter-container__selected-filter-list ul").html("");
                         $(".filter-container input[type=checkbox]").attr('checked', false);
                         $(".filter-container__selected-filter").hide();
-        
+
                         doSearch(1);
                     }
             </script>
