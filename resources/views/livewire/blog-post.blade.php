@@ -32,7 +32,7 @@
 
 
 
- 
+
             <link href="/bizweb.dktcdn.net/100/436/596/themes/834446/assets/iwish.css?1721662888170" rel="stylesheet"
                 type="text/css" media="all" />
             <link href="/bizweb.dktcdn.net/100/436/596/themes/834446/assets/appbulk-available-notice.css?1721662888170"
@@ -107,9 +107,9 @@
 
 
                                 <div class="col-md-12 margin-bottom-10">
-                                    <script type="text/javascript"
+                                    {{-- <script type="text/javascript"
                                         src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-5a099baca270babc">
-                                    </script>
+                                    </script> --}}
                                     <div class="addthis_inline_share_toolbox_jje8"></div>
                                 </div>
 
@@ -128,7 +128,7 @@
                                                 </a>
                                                 <span class="separator"></span>
                                             @endif
-                                    
+
                                             @if($nextPost)
                                                 <a href="/blog/{{$nextPost->slug ? $nextPost->slug : ''   }}" title="Bài tiếp theo">
                                                     Bài tiếp theo<svg class="Icon Icon--select-arrow-right" role="presentation" viewBox="0 0 11 18">
@@ -335,7 +335,7 @@
                     <div class="error-message"></div>
                 </div>
             </div>
-             
+
             <div id="popup-cart" class="modal fade" role="dialog">
                 <div id="popup-cart-desktop" class="clearfix">
                     <div class="title-popup-cart"><i class="ion ion-md-notifications-outline" aria-hidden="true"></i>
